@@ -1,0 +1,232 @@
+% boiler-plate base document generates by Claude Sonnet 4
+\documentclass[12pt,a4paper]{article}
+
+% Essential packages for XeLaTeX
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+
+% Set main font (using more universally available fonts)
+% Option 1: Use TeX Gyre fonts (included with most LaTeX distributions)
+\setmainfont{TeX Gyre Termes}  % Times-like font
+\setsansfont{TeX Gyre Heros}   % Helvetica-like font
+\setmonofont{TeX Gyre Cursor}  % Courier-like font
+
+% Option 2: Alternative fonts if TeX Gyre isn't available (uncomment to use)
+% \setmainfont{Liberation Serif}
+% \setsansfont{Liberation Sans}
+% \setmonofont{Liberation Mono}
+
+% Option 3: Fallback to basic fonts (uncomment if others don't work)
+% \setmainfont{Latin Modern Roman}
+% \setsansfont{Latin Modern Sans}
+% \setmonofont{Latin Modern Mono}
+
+% Language and encoding
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+% Mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% Graphics and figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{array}
+
+% Hyperlinks and cross-references
+\usepackage[colorlinks=true,
+            linkcolor=blue,
+            urlcolor=blue,
+            citecolor=red,
+            filecolor=magenta]{hyperref}
+\usepackage{cleveref} % For smart cross-referencing
+
+% Bibliography
+\usepackage[style=authoryear,backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\leftmark}
+
+% Additional useful packages
+\usepackage{enumitem}
+\usepackage{tikz} % For drawing diagrams
+\usepackage{listings} % For code blocks
+\usepackage{xcolor}
+
+% Title page information
+\title{Notes and Thoughts on Implementing Windowed-Multipole through Vector Fitting}
+\author{Andrew Holcomb}
+\date{\today}
+
+% Custom commands (optional)
+\newcommand{\FIXME}[1]{\textcolor{red}{\textbf{#1}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}\label{sec:introduction}
+
+This document demonstrates various LaTeX features including cross-references, hyperlinks, equations, figures, and citations. This is a sample introduction that references \Cref{sec:equations} and \Cref{fig:sample-image}.
+
+You can create hyperlinks to external websites like \href{https://www.latex-project.org/}{The LaTeX Project} or \href{https://www.overleaf.com/}{Overleaf}.
+
+\section{Mathematical Equations}\label{sec:equations}
+
+Here are some examples of numbered equations that will be automatically numbered:
+
+\begin{equation}\label{eq:quadratic}
+ax^2 + bx + c = 0
+\end{equation}
+
+The solutions to \Cref{eq:quadratic} are given by the quadratic formula:
+
+\begin{equation}\label{eq:quadratic-formula}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+
+You can also have multi-line equations:
+
+\begin{align}\label{eq:multi-line}
+f(x) &= x^2 + 2x + 1 \\
+&= (x + 1)^2 \label{eq:factored}
+\end{align}
+
+As shown in \Cref{eq:factored}, the expression can be factored.
+
+For inline math, you can write $E = mc^2$ or $\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$.
+
+\section{Figures and Images}\label{sec:figures}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{o16-2-u235-18.png}
+
+    % For demonstration, using a TikZ drawing since we don't have an actual image
+    %\begin{tikzpicture}
+    %    \draw[thick] (0,0) rectangle (4,3);
+    %    \draw[thick] (0,0) -- (4,3);
+    %    \draw[thick] (0,3) -- (4,0);
+    %    \node at (2,1.5) {\Large Sample Figure};
+    %\end{tikzpicture}
+
+    \caption{This is a sample figure demonstrating figure inclusion.}
+    \label{fig:sample-image}
+\end{figure}
+
+As you can see in \Cref{fig:sample-image}, figures are automatically numbered and can be cross-referenced throughout the document.
+
+\subsection{Multiple Subfigures}
+
+You can also create subfigures:
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw[fill=blue!20] (0,0) circle (1);
+            \node at (0,0) {A};
+        \end{tikzpicture}
+        \caption{First subfigure}
+        \label{fig:sub1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw[fill=red!20] (0,0) rectangle (2,1.5);
+            \node at (1,0.75) {B};
+        \end{tikzpicture}
+        \caption{Second subfigure}
+        \label{fig:sub2}
+    \end{subfigure}
+    \caption{Example of subfigures with \protect\subref{fig:sub1} showing a circle and \protect\subref{fig:sub2} showing a rectangle.}
+    \label{fig:subfigures}
+\end{figure}
+
+\section{Tables}\label{sec:tables}
+
+\begin{table}[H]
+    \centering
+    \caption{Sample data table}
+    \label{tab:sample-data}
+    \begin{tabular}{@{}lcc@{}}
+        \toprule
+        Parameter & Value & Unit \\
+        \midrule
+        Temperature & 25.4 & °C \\
+        Pressure & 101.3 & kPa \\
+        Humidity & 65 & \% \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The data in \Cref{tab:sample-data} shows typical environmental conditions.
+
+\section{Citations and References}\label{sec:citations}
+
+You can cite references using various styles. For example, you might reference a seminal paper \parencite{einstein1905} or discuss the work of \textcite{newton1687}.
+
+Multiple citations can be grouped together \parencite{einstein1905,newton1687}.
+
+\section{Cross-References and Hyperlinks}\label{sec:cross-refs}
+
+This document demonstrates several types of cross-references:
+
+\begin{itemize}
+    \item Section references: \Cref{sec:introduction}, \Cref{sec:equations}
+    \item Equation references: \Cref{eq:quadratic}, \Cref{eq:quadratic-formula}
+    \item Figure references: \Cref{fig:sample-image}, \Cref{fig:subfigures}
+    \item Table references: \Cref{tab:sample-data}
+\end{itemize}
+
+External links include:
+\begin{itemize}
+    \item \href{https://www.ctan.org/}{CTAN - The Comprehensive TeX Archive Network}
+    \item \href{https://tex.stackexchange.com/}{TeX Stack Exchange}
+    \item \href{https://detexify.kirelabs.org/classify.html}{Detexify - LaTeX symbol recognition}
+\end{itemize}
+
+\section{Code and Listings}
+
+You can include code snippets:
+
+\begin{lstlisting}[language=Python, caption=Sample Python code, label=lst:python]
+def hello_world():
+    print("Hello, World!")
+    return True
+
+if __name__ == "__main__":
+    hello_world()
+\end{lstlisting}
+
+\section{Conclusion}
+
+This boilerplate document provides a solid foundation for academic and technical writing with LaTeX. It includes all the essential packages and examples for the features you requested.
+
+\newpage
+\printbibliography
+
+\end{document}
